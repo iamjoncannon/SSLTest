@@ -16,6 +16,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
 
+app.get('./.well-known/acme-challenge/:id', (req, res) =>{
+
+	res.sendFile(path.join(__dirname, './server/.well-known/acme-challenge/') + req.params.id)
+	res.end()
+})
 
 app.use('./server/api', require('./server/api')) // include our routes!
 
