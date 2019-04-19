@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: 'Rawww',
+    name: 'SSLTest',
     script: './main.js'
   }],
   deploy: {
@@ -9,8 +9,8 @@ module.exports = {
       host: process.env.addy,
       key: process.env.key,
       ref: 'origin/master',
-      repo: 'git@github.com:iamjoncannon/Raw.git',
-      path: '/home/ubuntu/Raw',
+      repo: 'git@github.com:iamjoncannon/SSLTest.git',
+      path: '/home/ubuntu/SSLTest',
       'post-deploy': 'sudo npm install && sudo pm2 startOrRestart ecosystem.config.js'
     }
   }
