@@ -20,3 +20,9 @@ ssh-add
 
 https://gist.github.com/firstdoit/6389682
 
+
+launch the server at the provided URL in non-secure mode, link 
+to that DNS, then shell back
+
+sudo certbot certonly --webroot -w ./server -d ssltest.joncannon.codes
+

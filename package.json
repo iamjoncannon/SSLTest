@@ -12,7 +12,7 @@
     "start-server": "nodemon -L --watch main.js -e html,js,css",
     "build": "webpack -w --progress",
     "start": "echo 'Running production server' && node server.js",
-    "site": "open http://$addy",
+    "site": ". ./deploy/addy.sh && open http://$addy",
     "compile": "NODE_ENV=production webpack -p --progress",
     "install-lazy": "npm install webpack@4.28.4 && npm install acorn-dynamic-import@4.0.0 && npm update acorn --depth 20 && npm dedupe"
   },
