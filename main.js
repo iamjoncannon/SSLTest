@@ -50,9 +50,8 @@ async function startServer(){
 
 	// await db.sync()
 
-    console.log('db synced')
+    // console.log('db synced')
     
-
 	httpServer.listen(PORT, () => {
 
 		console.log('HTTP Server running on port ', PORT);
