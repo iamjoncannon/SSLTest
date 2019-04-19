@@ -3,7 +3,7 @@
 aws ec2 describe-instances --instance-ids i-043f0af76893a3a41
 
 
-sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/node
+sudo setcap 'cap_net_bind_service=+ep' /usr/bin/node
 
 sudo setcap 'cap_net_bind_service=+ep' `which node`
 
