@@ -34,7 +34,7 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 app.get('*', (req, res) => {
 
 	if(!req.secure){
-		res.redirect('https://' + req.headers.host + req.url)
+		res.redirect('https://' + req.url)
 	}
 
 	console.log('hitting *')
