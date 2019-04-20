@@ -17,12 +17,12 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use((req, res, next)=>{
 
-	console.log('hitting the redirect middleware')
 	if (req.secure) {
 	
 		next();
 	} else {
-		console.log('req.secure', req.secure, 'req.url', req.url)
+		console.log('hitting the redirect middleware', req.url)
+		
 		res.redirect('https://' + req.headers.host + req.url)
 	}
 });
