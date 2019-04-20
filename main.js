@@ -16,7 +16,18 @@ app.use(express.urlencoded({ extended: true }))
 // static middleware
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
-// app.use(require('helmet')());
+
+app.use( (req, res, next) => {
+  if(!req.secure) {
+
+    var secureUrl = "https://" + req.headers['host'] + req.url; 
+    res.writeHead(301, { "Location":  secureUrl });
+
+  }
+
+  next();
+});
+
 
 app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
@@ -33,15 +44,9 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
 app.get('*', (req, res) => {
 
-	if(!req.secure){
-		res.redirect('https://' + req.url)
-		console.log('hitting *')
-	}
-	else{
-
 	  res.sendFile(path.join(__dirname, './public/index.html'))
 	  res.end()
-	}
+
 
 }) // Send index.html for any other requests
 
