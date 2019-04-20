@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
 
 app.use((req, res, next)=>{
-	
+	console.log('hitting the redirect middleware')
 	if (req.secure) {
 	
 		next();
