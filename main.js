@@ -10,7 +10,8 @@ const https = require('https');
 const fs = require('fs')
 
 app.use((req, res, next )=>{
-	console.log('middleware is getting called')
+	
+	console.log('middleware is getting called', req)
 	next()
 })
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
 
 app.use((req, res, next)=>{
+
 	console.log('hitting the redirect middleware')
 	if (req.secure) {
 	
@@ -50,7 +52,7 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 app.get('*', (req, res) => {
 
 	console.log('hitting wildcard ', req.url)
-	  res.sendFile(path.join(__dirname, './public/index.html'))
+	  // res.sendFile(path.join(__dirname, './public/index.html'))
 	  res.end()
 
 
