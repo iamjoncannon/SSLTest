@@ -17,16 +17,15 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
 
-app.use( (req, res, next) => {
-  
-  if(!req.secure) {
-
-    var secureUrl = "https://" + req.headers['host'] + req.url; 
-    res.writeHead(301, { "Location":  secureUrl });
-    res.end()
-  }
-
-  next();
+app.use(function(req, res, next) {
+	
+	if (req.secure) {
+	
+		next();
+	} else {
+	
+		res.redirect('https://' + req.headers.host + req.url);
+	}
 });
 
 
