@@ -9,6 +9,8 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs')
 
+app.use(console.log('middleware is getting called'))
+
 // body parsing middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -44,7 +46,7 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
 app.get('*', (req, res) => {
 
-		console.log('hitting wildcard ', req.url)
+	console.log('hitting wildcard ', req.url)
 	  res.sendFile(path.join(__dirname, './public/index.html'))
 	  res.end()
 
