@@ -9,11 +9,6 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs')
 
-app.use((req, res, next )=>{
-	
-	console.log('middleware is getting called', req)
-	next()
-})
 
 // body parsing middleware
 app.use(express.json())
