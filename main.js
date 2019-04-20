@@ -9,7 +9,7 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs')
 
-app.use(console.log('middleware is getting called'))
+app.use(()=>console.log('middleware is getting called'))
 
 // body parsing middleware
 app.use(express.json())
