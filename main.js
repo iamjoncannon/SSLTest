@@ -3,20 +3,10 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-// const { db  } = require('./server/db')
+const { db  } = require('./server/db')
 const PORT = process.env.PORT || 3000
 const http = require('http');
 const https = require('https');
-const fs = require('fs')
-
-/*
-app.use((req,res)=>{
-
-console.log('hitting something',req.params, req.path, req.secure)
-res.status(200).send('goodbye world').end()
-
-})
-*/
 
 // body parsing middleware
 app.use(express.json())
@@ -26,28 +16,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
 
+app.get('./server/.well-known/acme-challenge/:id', (req, res) =>{
 
-app.get('/.well-known/acme-challenge/:id', (req, res) =>{
-
-        console.log('hitting with ', req.params)
-        let file = './.well-known/acme-challenge/' + req.params.id
-        // res.status(200).send('HITTING')
-        require('fs').readFile(file, (data) =>{
-
-        	console.log(data)
-	        res.status(200).send(data)
-	        res.end()
-        })
+	res.send('hitting with ', req.params.id)
+	// res.sendFile(path.join(__dirname, './server/.well-known/acme-challenge/') + req.params.id)
+	res.end()
 })
 
-
-// app.use('./server/api', require('./server/api')) // include our routes!
+app.use('./server/api', require('./server/api')) // include our routes!
 
 app.get('*', (req, res) => {
-
-console.log('hitting *')
   res.sendFile(path.join(__dirname, './public/index.html'))
-  res.end()
 }) // Send index.html for any other requests
 
 // error handling middleware
@@ -58,42 +37,36 @@ app.use((err, req, res, next) => {
 
 // SSL certificates
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/chain.pem', 'utf8');
+if(process.env.mode === 'secure'){
 
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
+	const privateKey = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/privkey.pem', 'utf8');
+	const certificate = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/cert.pem', 'utf8');
+	const ca = fs.readFileSync('/etc/letsencrypt/live/yourdomain.com/chain.pem', 'utf8');
 
-// const httpsServer = https.createServer(credentials, app);
+	const credentials = {
+		key: privateKey,
+		cert: certificate,
+		ca: ca
+	};
+
+	const httpsServer = https.createServer(credentials, app);
+}
 
 const httpServer = http.createServer(app);
 
-/* 
 async function startServer(){
 
 	// await db.sync()
 
     // console.log('db synced')
-	console.log(process.env.mode)
+    
+	httpServer.listen(PORT, () => {
 
+		console.log('HTTP Server running on port ', PORT);
+	});
 
-		httpsServer.listen(443, () => { console.log('HTTPS Server running on port 443', credentials); })
-
-
-//		httpServer.listen(80, () => {
-//			console.log('serving port 80')
-//	        });
-
+	process.env.mode === 'secure' ? httpsServer.listen(443, () => { console.log('HTTPS Server running on port 443'); }) : '' ;
 
 }
-*/
-//startServer()
 
-httpServer.listen(80, ()=>{console.log('started 80')});
-
-
-https.createServer(credentials, app).listen(443, (x)=>{console.log('started 443')} )
+startServer()
