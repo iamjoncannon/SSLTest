@@ -7,7 +7,7 @@
     "dep-install": "chmod +x ./deploy/install && ./deploy/install ubuntu@$addy",
     "dep-nginx": "chmod +x ./deploy/nginxConfig && ./deploy/nginxConfig",
     "deploy": ". ./deploy/addy.sh && addy=$addy key=$key pm2 deploy ecosystem.config.js production",
-    "deploy-init" : ". ./deploy/addy.sh && addy=$addy key=$key pm2 deploy ecosystem.config.js production setup",
+    "deploy-init": ". ./deploy/addy.sh && addy=$addy key=$key pm2 deploy ecosystem.config.js production setup",
     "start-dev": "npm run build & npm run start-server",
     "start-server": "nodemon -L --watch main.js -e html,js,css",
     "build": "webpack -w --progress",
@@ -23,6 +23,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
     "express": "^4.14.0",
+    "nodemon": "^1.18.11",
     "pg": "^7.9.0",
     "react": "^16.8.4",
     "react-dom": "^16.3.2",
@@ -32,7 +33,7 @@
     "redux-devtools-extension": "^2.13.7",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "sequelize": "^5.2.13"
+    "sequelize": "^5.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
