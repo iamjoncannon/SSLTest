@@ -9,15 +9,6 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs')
 
-/*
-app.use((req,res)=>{
-
-console.log('hitting something',req.params, req.path, req.secure)
-res.status(200).send('goodbye world').end()
-
-})
-*/
-
 // body parsing middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -25,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 // static middleware
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
-
+app.use(require('helmet')());
 
 app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
@@ -40,14 +31,15 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
         })
 })
 
-
-// app.use('./server/api', require('./server/api')) // include our routes!
-
 app.get('*', (req, res) => {
 
-console.log('hitting *')
-  res.sendFile(path.join(__dirname, './public/index.html'))
-  res.end()
+	if(!req.secure){
+		res.redirect('https://' + req.headers.host + req.url)
+	}
+
+	console.log('hitting *')
+	  res.sendFile(path.join(__dirname, './public/index.html'))
+	  res.end()
 }) // Send index.html for any other requests
 
 // error handling middleware
@@ -68,30 +60,7 @@ const credentials = {
 	ca: ca
 };
 
-// const httpsServer = https.createServer(credentials, app);
-
 const httpServer = http.createServer(app);
-
-/* 
-async function startServer(){
-
-	// await db.sync()
-
-    // console.log('db synced')
-	console.log(process.env.mode)
-
-
-		httpsServer.listen(443, () => { console.log('HTTPS Server running on port 443', credentials); })
-
-
-//		httpServer.listen(80, () => {
-//			console.log('serving port 80')
-//	        });
-
-
-}
-*/
-//startServer()
 
 httpServer.listen(80, ()=>{console.log('started 80')});
 
