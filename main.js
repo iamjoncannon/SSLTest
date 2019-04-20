@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 // static middleware
 app.use(express.static(path.join(__dirname, './public')))
 app.use(express.static(path.join(__dirname, './')))
-app.use(require('helmet')());
+// app.use(require('helmet')());
 
 app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
