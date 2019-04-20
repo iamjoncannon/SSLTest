@@ -35,11 +35,14 @@ app.get('*', (req, res) => {
 
 	if(!req.secure){
 		res.redirect('https://' + req.url)
+		console.log('hitting *')
 	}
+	else{
 
-	console.log('hitting *')
 	  res.sendFile(path.join(__dirname, './public/index.html'))
 	  res.end()
+	}
+
 }) // Send index.html for any other requests
 
 // error handling middleware
