@@ -19,9 +19,6 @@ app.use((req, res, next )=>{
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// static middleware
-app.use(express.static(path.join(__dirname, './public')))
-app.use(express.static(path.join(__dirname, './')))
 
 app.use((req, res, next)=>{
 
@@ -35,6 +32,9 @@ app.use((req, res, next)=>{
 	}
 });
 
+// static middleware
+app.use(express.static(path.join(__dirname, './public')))
+app.use(express.static(path.join(__dirname, './')))
 
 app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
