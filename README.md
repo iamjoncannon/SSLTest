@@ -24,5 +24,23 @@ https://gist.github.com/firstdoit/6389682
 launch the server at the provided URL in non-secure mode, link 
 to that DNS, then shell back
 
-export certify='sudo certbot certonly --dry-run --webroot -w ./server -d ssltest.joncannon.codes'
+sudo certbot certonly --webroot -w ./ -d ssltest.joncannon.codes
 
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/ssltest.joncannon.codes/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/ssltest.joncannon.codes/privkey.pem
+   Your cert will expire on 2019-07-18. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+
+
+chmod +x /etc/letsencrypt/live/yourdomain.com/privkey.pem
+chmod +x /etc/letsencrypt/live/yourdomain.com/cert.pem
+chmod +x /etc/letsencrypt/live/yourdomain.com/chain.pem
