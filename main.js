@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
 		next();
 	} else {
 	
-		res.redirect('https://' + req.headers.host + req.url);
+		res.redirect('https://' + req.headers.host + req.url)
 	}
 });
 
@@ -44,6 +44,7 @@ app.get('/.well-known/acme-challenge/:id', (req, res) =>{
 
 app.get('*', (req, res) => {
 
+	console.log('hitting wildcard ', req.url)
 	  res.sendFile(path.join(__dirname, './public/index.html'))
 	  res.end()
 
