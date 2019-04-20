@@ -22,9 +22,7 @@ app.use( (req, res, next) => {
 
     var secureUrl = "https://" + req.headers['host'] + req.url; 
     res.writeHead(301, { "Location":  secureUrl });
-
   }
-
   next();
 });
 
