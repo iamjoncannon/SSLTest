@@ -9,6 +9,7 @@ module.exports = {
       host: process.env.addy,
       key: process.env.key,
       ref: 'origin/master',
+      branch: 'ec2',
       repo: 'https://github.com/iamjoncannon/SSLTest',
       path: '/home/ubuntu/SSLTest',
       'post-deploy': 'sudo npm install && sudo pm2 startOrRestart ecosystem.config.js'
