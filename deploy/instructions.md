@@ -27,7 +27,7 @@ This is the AWS CLI script to launch an EC2- careful - don't wanna blow the free
 ```bash
 aws ec2 run-instances --launch-template LaunchTemplateId=lt-04dfc64765fa9b907,Version=1 
 
-aws ec2 describe-instances --instance-ids i-043f0af76893a3a41
+aws ec2 describe-instances --instance-ids i-0b4797c7ab7241808
 
 ```
 

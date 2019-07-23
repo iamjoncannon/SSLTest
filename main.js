@@ -9,11 +9,9 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs')
 
-
 // body parsing middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-
 
 app.use((req, res, next)=>{
 
@@ -61,18 +59,26 @@ app.use((err, req, res, next) => {
 
 // SSL certificates
 
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/chain.pem', 'utf8');
-
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
 
 const httpServer = http.createServer(app);
 
 httpServer.listen(80, ()=>{console.log('started 80')});
 
-https.createServer(credentials, app).listen(443, (x)=>{console.log('started 443')} )
+if(process.env.MODE === "secured"){
+
+	const privateKey = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/privkey.pem', 'utf8');
+	const certificate = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/cert.pem', 'utf8');
+	const ca = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/chain.pem', 'utf8');
+
+	const credentials = {
+		key: privateKey,
+		cert: certificate,
+		ca: ca
+	};
+
+	https.createServer(credentials, app).listen(443, (x)=>{console.log('started 443')} )
+
+}
+
+
+
