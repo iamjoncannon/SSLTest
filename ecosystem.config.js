@@ -8,7 +8,7 @@ module.exports = {
       user: 'ubuntu',
       host: process.env.addy,
       key: process.env.key,
-      ref: 'origin/master',
+      ref: 'origin/ec2',
       branch: 'ec2',
       repo: 'https://github.com/iamjoncannon/SSLTest',
       path: '/home/ubuntu/SSLTest',
