@@ -66,9 +66,9 @@ httpServer.listen(80, ()=>{console.log('started 80')});
 
 if(process.env.MODE === "secured"){
 
-	const privateKey = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/privkey.pem', 'utf8');
-	const certificate = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/cert.pem', 'utf8');
-	const ca = fs.readFileSync('/etc/letsencrypt/live/ssltest.joncannon.codes/chain.pem', 'utf8');
+	const privateKey = fs.readFileSync('/etc/letsencrypt/live/townhall.joncannon.codes/privkey.pem', 'utf8');
+	const certificate = fs.readFileSync('/etc/letsencrypt/live/townhall.joncannon.codes/cert.pem', 'utf8');
+	const ca = fs.readFileSync('/etc/letsencrypt/live/townhall.joncannon.codes/chain.pem', 'utf8');
 
 	const credentials = {
 		key: privateKey,
