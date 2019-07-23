@@ -4,7 +4,7 @@
   "main": "main.js",
   "scripts": {
     "sh": ". ./deploy/addy.sh && echo $addy && cd ~/.ssh & ssh -i $key ubuntu@ec2-35-160-250-123.us-west-2.compute.amazonaws.com",
-    "dep-install": "chmod +x ./deploy/install && ./deploy/install ubuntu@$addy",
+    "dep-install": "chmod +x ./deploy/install && ./deploy/install ubuntu@ec2-35-160-250-123.us-west-2.compute.amazonaws.com",
     "dep-nginx": "chmod +x ./deploy/nginxConfig && ./deploy/nginxConfig",
     "deploy": ". ./deploy/addy.sh && addy=ec2-35-160-250-123.us-west-2.compute.amazonaws.com key=$key pm2 deploy ecosystem.config.js production",
     "deploy-init": ". ./deploy/addy.sh && addy=ec2-35-160-250-123.us-west-2.compute.amazonaws.com key=$key pm2 deploy ecosystem.config.js production setup",
